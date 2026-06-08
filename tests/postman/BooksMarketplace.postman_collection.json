@@ -1,0 +1,48 @@
+{
+  "info": {
+    "_postman_id": "80e59437-0ffd-44d6-8078-6006f6769f45",
+    "name": "BooksMarketplace",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54007545",
+    "_collection_link": "https://go.postman.co/collection/54007545-80e59437-0ffd-44d6-8078-6006f6769f45?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "New Request",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "x-api-key",
+            "value": "{{apiKey}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "https://34.160.195.169.nip.io/v1/books/search.json?q=tolkien",
+          "protocol": "https",
+          "host": [
+            "34",
+            "160",
+            "195",
+            "169",
+            "nip",
+            "io"
+          ],
+          "path": [
+            "v1",
+            "books",
+            "search.json"
+          ],
+          "query": [
+            {
+              "key": "q",
+              "value": "tolkien"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

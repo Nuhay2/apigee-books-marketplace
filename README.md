@@ -12,7 +12,6 @@ over the public [OpenLibrary API](https://openlibrary.org/developers/api).
 The proxy `books-v1` exposes a versioned, paginated, façade-shaped API on top of
 OpenLibrary's verbose backend:
 
-\`\`\`
 Client (Postman / App)
 │
 │ GET /v1/books/search.json?q=tolkien
@@ -39,7 +38,6 @@ Client (Postman / App)
 │
 ▼
 OpenLibrary public API
-\`\`\`
 
 ## What it demonstrates
 
@@ -72,14 +70,12 @@ OpenLibrary public API
 
 ## Repository structure
 
-\`\`\`
 .
 ├── proxies/books-v1/apiproxy/ # The Apigee proxy bundle
 ├── config/ # API Products and Apps definitions
 ├── tests/postman/ # Postman collection for integration tests
 ├── docs/ # Architecture decisions, conventions
 └── .github/workflows/ # CI/CD pipelines
-\`\`\`
 
 ## Deployment
 

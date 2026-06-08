@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-AddRateLimitHeaders">
+  <DisplayName>AM-AddRateLimitHeaders</DisplayName>
+  <AssignTo createNew="false" transport="http" type="response"/>
+  <Set>
+    <Headers>
+      <Header name="X-RateLimit-Limit">{ratelimit.Q-PerAppLimit.allowed.count}</Header>
+      <Header name="X-RateLimit-Remaining">{ratelimit.Q-PerAppLimit.available.count}</Header>
+      <Header name="X-RateLimit-Reset">{ratelimit.Q-PerAppLimit.expiry.time}</Header>
+    </Headers>
+  </Set>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>

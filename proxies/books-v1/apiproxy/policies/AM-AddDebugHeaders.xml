@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="true" enabled="true" name="AM-AddDebugHeaders">
+  <DisplayName>AM-AddDebugHeaders</DisplayName>
+  <AssignTo createNew="false" transport="http" type="response"/>
+  <Set>
+    <Headers>
+      <Header name="X-Debug-CorrelationId">{request.header.x-correlation-id}</Header>
+      <Header name="X-Debug-App">{developer.app.name}</Header>
+      <Header name="X-Debug-Developer">{developer.email}</Header>
+      <Header name="X-Debug-Product">{apiproduct.name}</Header>
+      <Header name="X-Debug-QuotaUsed">{ratelimit.Q-PerAppLimit.used.count}</Header>
+      <Header name="X-Debug-QuotaLimit">{ratelimit.Q-PerAppLimit.allowed.count}</Header>
+      <Header name="X-Debug-TargetLatency">{target.duration}</Header>
+      <Header name="X-Debug-TotalLatency">{client.received.end.timestamp}</Header>
+    </Headers>
+  </Set>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+  <Description/>
+  <FaultRules/>
+  <PreFlow name="PreFlow">
+    <Request>
+      <Step>
+        <Name>SA-AntiBurst</Name>
+        <Condition>NOT (proxy.pathsuffix MatchesPath "/health")</Condition>
+      </Step>
+      <Step>
+        <Name>VK-VerifyKey</Name>
+        <Condition>NOT (proxy.pathsuffix MatchesPath "/health")</Condition>
+      </Step>
+      <Step>
+        <Name>Q-PerAppLimit</Name>
+        <Condition>NOT (proxy.pathsuffix MatchesPath "/health")</Condition>
+      </Step>
+    </Request>
+    <Response/>
+  </PreFlow>
+  <Flows>
+    <Flow name="SearchBooks">
+      <Description>Recherche de livres par mot-clé</Description>
+      <Condition>(proxy.pathsuffix MatchesPath "/search.json") and (request.verb = "GET")</Condition>
+      <Request/>
+      <Response>
+        <Step>
+          <Name>JS-TransformBooksResponse</Name>
+        </Step>
+      </Response>
+    </Flow>
+    <Flow name="GetBookById">
+      <Description>Détail d'un livre par son ID</Description>
+      <Condition>(proxy.pathsuffix MatchesPath "/works/*") and (request.verb = "GET")</Condition>
+      <Request/>
+      <Response/>
+    </Flow>
+    <Flow name="HealthCheck">
+      <Description>Healthcheck - returns OK without calling backend</Description>
+      <Condition>(proxy.pathsuffix MatchesPath "/health") and (request.verb = "GET")</Condition>
+      <Request>
+        <Step>
+          <Name>RF-HealthCheckOk</Name>
+        </Step>
+      </Request>
+      <Response/>
+    </Flow>
+  </Flows>
+  <PostFlow name="PostFlow">
+    <Request/>
+    <Response>
+      <Step>
+        <Name>AM-AddRateLimitHeaders</Name>
+        <Condition>NOT (proxy.pathsuffix MatchesPath "/health")</Condition>
+      </Step>
+      <Step>
+        <Name>AM-AddDebugHeaders</Name>
+        <Condition>request.header.X-Debug-Enabled = "true"</Condition>
+      </Step>
+    </Response>
+  </PostFlow>
+  <HTTPProxyConnection>
+    <BasePath>/v1/books</BasePath>
+    <Properties/>
+  </HTTPProxyConnection>
+  <RouteRule name="default">
+    <TargetEndpoint>default</TargetEndpoint>
+  </RouteRule>
+</ProxyEndpoint>

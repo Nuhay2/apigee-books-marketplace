@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<SpikeArrest continueOnError="false" enabled="true" name="SA-AntiBurst">
+  <DisplayName>SA-AntiBurst</DisplayName>
+  <Properties/>
+  <Identifier ref="client_ip"/>
+  <Rate>10ps</Rate>
+</SpikeArrest>

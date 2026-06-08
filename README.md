@@ -12,39 +12,41 @@ over the public [OpenLibrary API](https://openlibrary.org/developers/api).
 The proxy `books-v1` exposes a versioned, paginated, façade-shaped API on top of
 OpenLibrary's verbose backend:
 
+```
 Client (Postman / App)
-│
-│ GET /v1/books/search.json?q=tolkien
-│ x-api-key: <consumer-key>
-▼
-┌─────────────────────────────────────────┐
-│ APIGEE X — books-v1 proxy │
-│ │
-│ PreFlow: │
-│ • AM-AddCorrelationId │
-│ • SA-AntiBurst (10 req/s) │
-│ • VK-VerifyKey │
-│ • Q-PerAppLimit (100 req/min/app) │
-│ │
-│ Conditional Flows: │
-│ • SearchBooks → JS-Transform façade │
-│ • HealthCheck → RF returns 200 OK │
-│ │
-│ PostFlow: │
-│ • AM-EchoCorrelationId │
-│ • AM-AddRateLimitHeaders │
-│ • AM-AddDebugHeaders (opt-in) │
-└─────────────────────────────────────────┘
-│
-▼
-OpenLibrary public API
+        |
+        |   GET /v1/books/search.json?q=tolkien
+        |   x-api-key: <consumer-key>
+        v
++-----------------------------------------+
+|   APIGEE X -- books-v1 proxy            |
+|                                         |
+|   PreFlow:                              |
+|   - AM-AddCorrelationId                 |
+|   - SA-AntiBurst   (10 req/s)           |
+|   - VK-VerifyKey                        |
+|   - Q-PerAppLimit  (100 req/min/app)    |
+|                                         |
+|   Conditional Flows:                    |
+|   - SearchBooks -> JS-Transform facade  |
+|   - HealthCheck -> RF returns 200 OK    |
+|                                         |
+|   PostFlow:                             |
+|   - AM-EchoCorrelationId                |
+|   - AM-AddRateLimitHeaders              |
+|   - AM-AddDebugHeaders (opt-in)         |
++-----------------------------------------+
+        |
+        v
+   OpenLibrary public API
+```
 
 ## What it demonstrates
 
 - **API design**: versioning (`/v1/`), façade pattern, decoupled URL from backend.
 - **Security**: API Key authentication via Developer/App/Product hierarchy.
-- **Traffic management**: Spike Arrest (instantaneous protection) + Quota (commercial limit) — applied in canonical order.
-- **Transformation**: JavaScript-based response reshape (40 fields → 6 fields, camelCase, computed cover URLs).
+- **Traffic management**: Spike Arrest (instantaneous protection) + Quota (commercial limit), applied in canonical order.
+- **Transformation**: JavaScript-based response reshape (40 fields to 6 fields, camelCase, computed cover URLs).
 - **Observability**: Correlation ID propagation, debug-mode headers, MessageLogging policy structure (Cloud Logging-ready).
 - **Resilience**: DefaultFaultRule for error logging, IgnoreUnresolvedVariables on optional paths.
 
@@ -70,14 +72,21 @@ OpenLibrary public API
 
 ## Repository structure
 
+```
 .
-├── proxies/books-v1/apiproxy/ # The Apigee proxy bundle
-├── config/ # API Products and Apps definitions
-├── tests/postman/ # Postman collection for integration tests
-├── docs/ # Architecture decisions, conventions
-└── .github/workflows/ # CI/CD pipelines
+├── proxies/books-v1/apiproxy/    # The Apigee proxy bundle
+├── config/                       # API Products and Apps definitions
+├── tests/postman/                # Postman collection for integration tests
+├── docs/                         # Architecture decisions, conventions
+└── .github/workflows/            # CI/CD pipelines
+```
 
 ## Deployment
 
 This proxy is deployable on any Apigee X organization. Manual deployment via
 the Apigee console (Upload bundle), or automated via `apigeecli` (see `.github/workflows/`).
+
+## Author
+
+Built as a hands-on learning project, with the goal of mastering Apigee X for
+API management roles.

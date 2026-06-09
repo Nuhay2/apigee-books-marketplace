@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<VerifyJWT continueOnError="false" enabled="true" name="JWT-VerifyAccessToken">
+  <DisplayName>JWT-VerifyAccessToken</DisplayName>
+  <Algorithm>HS256</Algorithm>
+  <Source>jwt.raw.token</Source>
+  <SecretKey>
+    <Value ref="private.jwt_secret"/>
+  </SecretKey>
+</VerifyJWT>

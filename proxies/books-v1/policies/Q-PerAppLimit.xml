@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Quota continueOnError="false" enabled="true" name="Q-PerAppLimit">
+  <DisplayName>Q-PerAppLimit</DisplayName>
+  <Allow countRef="jwt.JWT-VerifyAccessToken.decoded.claim.quota_limit"/>
+  <Interval ref="jwt.JWT-VerifyAccessToken.decoded.claim.quota_interval"/>
+  <TimeUnit ref="jwt.JWT-VerifyAccessToken.decoded.claim.quota_timeunit"/>
+  <Identifier ref="jwt.JWT-VerifyAccessToken.decoded.claim.client_id"/>
+  <Distributed>true</Distributed>
+  <Synchronous>false</Synchronous>
+</Quota>

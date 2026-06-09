@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<APIProxy revision="21" name="books-v1">
+<APIProxy revision="29" name="books-v1">
   <DisplayName/>
   <Description> Books Marketplace API (test)</Description>
-  <CreatedAt>1780581512427</CreatedAt>
-  <LastModifiedAt>1780581512427</LastModifiedAt>
+  <CreatedAt>1780995255522</CreatedAt>
+  <LastModifiedAt>1780995255522</LastModifiedAt>
   <BasePaths>/v1/books</BasePaths>
   <Policies>
     <Policy>RF-HealthCheckOk</Policy>
@@ -13,6 +13,10 @@
     <Policy>JS-TransformBooksResponse</Policy>
     <Policy>AM-AddRateLimitHeaders</Policy>
     <Policy>AM-AddDebugHeaders</Policy>
+    <Policy>OA-VerifyAccessToken</Policy>
+    <Policy>KVM-GetJWTSecret</Policy>
+    <Policy>JWT-VerifyAccessToken</Policy>
+    <Policy>AM-ExtractJWT</Policy>
   </Policies>
   <ProxyEndpoints>
     <ProxyEndpoint>default</ProxyEndpoint>

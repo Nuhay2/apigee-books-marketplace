@@ -9,7 +9,15 @@
         <Condition>NOT (proxy.pathsuffix MatchesPath "/health")</Condition>
       </Step>
       <Step>
-        <Name>VK-VerifyKey</Name>
+        <Name>KVM-GetJWTSecret</Name>
+        <Condition>NOT (proxy.pathsuffix MatchesPath "/health")</Condition>
+      </Step>
+      <Step>
+        <Name>AM-ExtractJWT</Name>
+        <Condition>NOT (proxy.pathsuffix MatchesPath "/health")</Condition>
+      </Step>
+      <Step>
+        <Name>JWT-VerifyAccessToken</Name>
         <Condition>NOT (proxy.pathsuffix MatchesPath "/health")</Condition>
       </Step>
       <Step>

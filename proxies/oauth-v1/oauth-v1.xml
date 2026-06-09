@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="13" name="oauth-v1">
+  <DisplayName/>
+  <Description/>
+  <CreatedAt>1780999325549</CreatedAt>
+  <LastModifiedAt>1780999325549</LastModifiedAt>
+  <BasePaths>/v1/oauth</BasePaths>
+  <Policies>
+    <Policy>OA-GenerateAccessToken</Policy>
+    <Policy>KVM-GetJWTSecret</Policy>
+    <Policy>JWT-GenerateAccessToken</Policy>
+    <Policy>AM-BuildTokenResponse</Policy>
+  </Policies>
+  <ProxyEndpoints>
+    <ProxyEndpoint>default</ProxyEndpoint>
+  </ProxyEndpoints>
+</APIProxy>

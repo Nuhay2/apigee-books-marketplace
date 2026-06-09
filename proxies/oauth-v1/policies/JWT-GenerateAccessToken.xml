@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<GenerateJWT continueOnError="false" enabled="true" name="JWT-GenerateAccessToken">
+  <DisplayName>JWT-GenerateAccessToken</DisplayName>
+  <Algorithm>HS256</Algorithm>
+  <SecretKey>
+    <Value ref="private.jwt_secret"/>
+  </SecretKey>
+  <ExpiresIn>3600s</ExpiresIn>
+  <Subject ref="apigee.client_id"/>
+  <Issuer>oauth-v1</Issuer>
+  <AdditionalClaims>
+    <Claim name="client_id" ref="apigee.client_id"/>
+    <Claim name="application_name" ref="apigee.developer.app.name"/>
+    <Claim name="quota_limit">100</Claim>
+    <Claim name="quota_interval">1</Claim>
+    <Claim name="quota_timeunit">minute</Claim>
+    <Claim name="tier">standard</Claim>
+  </AdditionalClaims>
+  <OutputVariable>jwt.generated.token</OutputVariable>
+</GenerateJWT>

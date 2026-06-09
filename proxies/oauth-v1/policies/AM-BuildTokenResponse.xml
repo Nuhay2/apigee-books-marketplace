@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage continueOnError="false" enabled="true" name="AM-BuildTokenResponse">
+  <DisplayName>AM-BuildTokenResponse</DisplayName>
+  <AssignTo createNew="false" transport="http" type="response"/>
+  <Set>
+    <Headers>
+      <Header name="Content-Type">application/json</Header>
+    </Headers>
+    <Payload contentType="application/json">{
+  "access_token": "{jwt.generated.token}",
+  "token_type": "Bearer",
+  "expires_in": 3600
+}</Payload>
+    <StatusCode>200</StatusCode>
+  </Set>
+  <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</AssignMessage>

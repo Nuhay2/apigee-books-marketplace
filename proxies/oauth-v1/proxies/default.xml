@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+  <HTTPProxyConnection>
+    <BasePath>/v1/oauth</BasePath>
+  </HTTPProxyConnection>
+  <Flows>
+    <Flow name="GetAccessToken">
+      <Description>Generates an OAuth2 access token via client_credentials</Description>
+      <Condition>(proxy.pathsuffix MatchesPath "/token") and (request.verb = "POST")</Condition>
+      <Request>
+        <Step>
+          <Name>KVM-GetJWTSecret</Name>
+        </Step>
+        <Step>
+          <Name>OA-GenerateAccessToken</Name>
+        </Step>
+        <Step>
+          <Name>JWT-GenerateAccessToken</Name>
+        </Step>
+      </Request>
+      <Response>
+        <Step>
+          <Name>AM-BuildTokenResponse</Name>
+        </Step>
+      </Response>
+    </Flow>
+  </Flows>
+  <RouteRule name="noroute"/>
+</ProxyEndpoint>
